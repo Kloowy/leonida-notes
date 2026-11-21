@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raul&#x27;s Leonida Field Guide — GTA 6 Checklist</title>
+  <meta name="description" content="Verified GTA 6 cash stashes, hidden loot, Easter eggs &amp; Day-1 rules. Zero rumors, updated with every Short." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --surface: #131722;
+      --surface-hover: #181e2c;
+      --border: #22293a;
+      --text: #f3f5fa;
+      --muted: #98a2b8;
+      --dim: #667085;
+      --money: #34d399;
+      --money-bg: rgba(52, 211, 153, 0.11);
+      --egg: #fb7185;
+      --egg-bg: rgba(251, 113, 133, 0.11);
+      --rule: #fbbf24;
+      --rule-bg: rgba(251, 191, 36, 0.11);
+      --accent: #ff4d8d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 24px 16px 64px;
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    .top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--money);
+      background: var(--money-bg);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--money);
+    }
+
+    .yt-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .yt-link:hover { color: var(--text); }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 14.5px;
+      max-width: 580px;
+    }
+
+    /* Progress bar */
+    .progress-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+
+    .progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .progress-count {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .progress-count span { color: var(--muted); font-weight: 500; font-family: 'Inter', sans-serif; font-size: 13.5px; }
+
+    .progress-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: #36415c; background: rgba(255,255,255,0.03); }
+
+    .bar-track {
+      height: 7px;
+      background: #1c2232;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #34d399, #22d3ee);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    /* Sticky controls */
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11, 13, 18, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 10px 0 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(34, 41, 58, 0.6);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-bottom: 10px;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      flex: 0 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab:hover { color: var(--text); border-color: #343f59; }
+    .tab.active {
+      background: var(--text);
+      color: #0b0d12;
+      border-color: var(--text);
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .search-box::placeholder { color: var(--dim); }
+    .search-box:focus { border-color: #4b5a7d; }
+
+    /* Cards */
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
+    }
+    .card:hover {
+      background: var(--surface-hover);
+      border-color: #303a52;
+    }
+    .card.done {
+      opacity: 0.48;
+    }
+    .card.done .card-title {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .check {
+      flex: 0 0 22px;
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      border-radius: 7px;
+      border: 2px solid #3c4763;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .card.done .check {
+      background: var(--money);
+      border-color: var(--money);
+    }
+    .check svg {
+      width: 13px;
+      height: 13px;
+      stroke: #0b0d12;
+      stroke-width: 3;
+      fill: none;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: all 0.15s ease;
+    }
+    .card.done .check svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 5px;
+    }
+
+    .cat-pill {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .cat-money { color: var(--money); background: var(--money-bg); }
+    .cat-easter_eggs { color: var(--egg); background: var(--egg-bg); }
+    .cat-survival { color: var(--rule); background: var(--rule-bg); }
+
+    .loc {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .card-tip {
+      font-size: 13.8px;
+      color: #b7c0d4;
+      line-height: 1.5;
+    }
+
+    .card-foot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .reward {
+      color: #d6deee;
+      font-weight: 600;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--dim);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media print {
+      body { background: #fff; color: #111; padding: 0; }
+      .controls, .progress-actions, .yt-link { display: none !important; }
+      .card, .progress-card { background: #fff; border: 1px solid #ddd; break-inside: avoid; }
+      .card-title { color: #111; }
+      .card-tip, .loc, .sub { color: #333; }
+      .card.done { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="top-meta">
+        <span class="badge">Live Guide &bull; Updated Nov 21, 2026</span>
+        <a class="yt-link" href="https://www.youtube.com/@raulleonidanotes" target="_blank" rel="noopener">YouTube @raulleonidanotes &rarr;</a>
+      </div>
+      <h1>Raul&#x27;s Leonida Field Guide</h1>
+      <p class="sub">Verified GTA 6 cash stashes, hidden loot, Easter eggs &amp; Day-1 rules. Zero rumors, updated with every Short.</p>
+    </header>
+
+    <section class="progress-card">
+      <div class="progress-top">
+        <div class="progress-count" id="progressText">0 / 15 <span>checked off</span></div>
+        <div class="progress-actions">
+          <button class="btn-ghost" type="button" onclick="window.print()">Save / Print PDF</button>
+          <button class="btn-ghost" type="button" id="resetBtn">Reset</button>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="progressBar"></div></div>
+    </section>
+
+    <div class="controls">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-cat="all">All</button>
+        <button class="tab" data-cat="money">Cash &amp; Loot</button>
+        <button class="tab" data-cat="easter_eggs">Easter Eggs</button>
+        <button class="tab" data-cat="survival">Day-1 Rules</button>
+      </div>
+      <input class="search-box" id="searchInput" type="search" placeholder="Search spots, weapons, Key Lento, Dexter..." autocomplete="off" />
+    </div>
+
+    <main class="list" id="cardList"></main>
+
+    <footer>
+      <span>Progress saves automatically on this device.</span>
+      <span>Updates live with new <a href="https://www.youtube.com/@raulleonidanotes" target="_blank" rel="noopener">@raulleonidanotes</a> Shorts.</span>
+    </footer>
+  </div>
+
+  <script>
+    const ITEMS = [{"id": "crab-outpost-loot", "category": "money", "title": "$10K Marked Stash + Unique Crabshack VF5 SMG", "location": "Pelican Valley / West Key Lento", "reward": "$1-2K Cash + $8-10K Marked + SMG", "tip": "Clear the guarded Crab Research Outpost by the fishing shacks. Grab the gold weapon icon by the dockhouse and launder the marked bills at a Fence.", "tag": "Best Early Loot"}, {"id": "three-sheets-backroom", "category": "money", "title": "Three Sheets Liquor Hidden Backroom Stash", "location": "Key Lento", "reward": "Early Cash + Contraband", "tip": "Buy the rum for Jason's neighbor Shirley first so you don't break her quest. Then return, hop the rear fence, clear the guards, and follow the talking parrot to the stash.", "tag": "Chapter 1"}, {"id": "manatee-motel-shotgun", "category": "money", "title": "Abandoned Gang Cash + Free Shotgun", "location": "Manatee Motel (SW of Hamlet)", "reward": "Free Shotgun + Cash", "tip": "Listen for gunshots just above the Shoeless Keys. Wildlife wrecked the gang hideout — grab the free shotgun out back and sweep the leftover cash.", "tag": "Free Weapon"}, {"id": "kenton-shipwrecks", "category": "money", "title": "Underwater Shipwreck Cash Bundles", "location": "Off the Coast of Key Lento", "reward": "Waterproof Cash + Valuables", "tip": "No gunfight required. Underwater diving works right in Chapter 1 — dive the shallow coastal drop-offs and debris fields for waterproof cash and fenceable loot.", "tag": "No Combat"}, {"id": "floorboard-stash", "category": "money", "title": "Jason's Secret Floorboard Stash", "location": "Jason's House (Key Lento)", "reward": "Safe Cash & Gear Storage", "tip": "Hide hot cash and gear under the floorboards early in Chapter 1 so getting busted or wasted doesn't drain your bankroll.", "tag": "Safehouse"}, {"id": "dexter-apartment", "category": "easter_eggs", "title": "Dexter Morgan's Apartment, Roof Kill Kit & Boat", "location": "Trinity Apartments, Washington Island", "reward": "Kill Kit + Slice of Life Boat", "tip": "Spot the exterior AC unit by the door, then climb to the roof for the knife, tape, rope, and syringe. Check the nearby docks for the Lure Predator L35P boat.", "tag": "Short #01"}, {"id": "radio-tower-nest", "category": "easter_eggs", "title": "7-Minute Radio Tower Giant Bird's Nest", "location": "Vice-Dale County", "reward": "Throwable Eggs + Base Jump", "tip": "Scale the massive TV/cell tower ladder (~7 min climb). At the top: a giant nest of painted Easter eggs you can chuck off the edge, an influencer NPC, and a base jump.", "tag": "Short #03"}, {"id": "mandy-clues", "category": "easter_eggs", "title": "Mandy's Dark Backyard & Car Trunk Clues", "location": "Chapter 1 — 'Pipework' Mission", "reward": "Hidden Environmental Lore", "tip": "Don't walk straight out after meeting Mandy. Inspect her backyard and open car trunk for creepy environmental clues most players miss.", "tag": "Short #05"}, {"id": "trailer-bikini-girl", "category": "easter_eggs", "title": "Trailer 1 Bikini Girl (Rockstar Meta Roast)", "location": "Early Lucia Mission — 'Day Release'", "reward": "Secret Dialogue", "tip": "She's a separate NPC roaming the back of the yacht party. Walk up as Lucia — Lucia says she looks familiar, and she replies she's a famous model.", "tag": "New Find"}, {"id": "fabien-magazine", "category": "easter_eggs", "title": "GTA 5 Yoga Guru (Fabien LaRouche) Callback", "location": "Jason's Stilted House, Leonida Keys", "reward": "GTA 5 Universe Link", "tip": "Check the front deck in Chapter 1 for a 'Body Copy' fitness magazine featuring a yoga masterclass by Fabien LaRouche from GTA 5.", "tag": "GTA 5 Link"}, {"id": "rdr-gta4-books", "category": "easter_eggs", "title": "Red Dead & 2008 Liberty City Books", "location": "Millport & Key Lento", "reward": "RDR2 + GTA IV Lore", "tip": "Read the Western novels mentioning New Austin on the shelves at Jacob's Tavern (Millport), and check the back-door table in Jason's Key Lento house for a 2008 Liberty City mob memoir.", "tag": "Lore"}, {"id": "burner-cars-trackers", "category": "survival", "title": "Never Take Your Personal Car on Robberies", "location": "All Regions", "reward": "Avoid Impound", "tip": "Cops trace registered plates and impound your ride. Hotwire a burner car for loud jobs, or scrub trackers on stolen high-end cars at Pay 'N' Spray / a Fence first.", "tag": "Short #02"}, {"id": "trunk-duffel-buckme", "category": "survival", "title": "Trunk Loadouts, Duffel Bags & BuckMe ATMs", "location": "All Regions", "reward": "Keep Your Haul", "tip": "Rifles and spare outfits live in your car trunk. Getting wasted while carrying a Stash Bag risks losing the haul — deposit clean cash via BuckMe ATMs often and fence marked bills.", "tag": "Day-1 Rule"}, {"id": "early-suppressor-npcs", "category": "survival", "title": "Grab the Key Lento Suppressor & Respect NPCs", "location": "Key Lento Ammu-Nation", "reward": "Stealth Advantage", "tip": "Buy a sidearm suppressor right after the tutorial. Random Leonida NPCs pack concealed guns and jump you with bystanders — don't treat them like GTA 5 punching bags.", "tag": "Combat"}, {"id": "cheats-and-locked-shops", "category": "survival", "title": "Post-Story Cheats & 5 Ultimate-Only Shops", "location": "Progress Menu / Free-Roam", "reward": "Save Time", "tip": "Cheats unlock only after beating the story (and disable trophies/saving). Hit locked glass doors at Stock 305, Electric Fang Tattoo, Sara's Salon, One-Eyed Willie's, or Rideout Customs? Those 5 require the $100 Ultimate Edition.", "tag": "Short #04 & #06"}];
+    const STORAGE_KEY = "raul_leonida_checked_v1";
+    const CAT_LABELS = {
+      money: "Cash & Loot",
+      easter_eggs: "Easter Egg",
+      survival: "Day-1 Rule"
+    };
+
+    let activeCat = "all";
+    let query = "";
+    let checked = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
+
+    const listEl = document.getElementById("cardList");
+    const tabsEl = document.getElementById("tabs");
+    const searchEl = document.getElementById("searchInput");
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...checked]));
+    }
+
+    function updateCounts() {
+      const validChecked = ITEMS.filter(i => checked.has(i.id)).length;
+      const pct = ITEMS.length ? Math.round((validChecked / ITEMS.length) * 100) : 0;
+      progressText.innerHTML = `${validChecked} / ${ITEMS.length} <span>checked off (${pct}%)</span>`;
+      progressBar.style.width = pct + "%";
+
+      const counts = {
+        all: ITEMS.length,
+        money: ITEMS.filter(i => i.category === "money").length,
+        easter_eggs: ITEMS.filter(i => i.category === "easter_eggs").length,
+        survival: ITEMS.filter(i => i.category === "survival").length
+      };
+      tabsEl.querySelectorAll(".tab").forEach(btn => {
+        const c = btn.dataset.cat;
+        const base = c === "all" ? "All" : c === "money" ? "Cash & Loot" : c === "easter_eggs" ? "Easter Eggs" : "Day-1 Rules";
+        btn.textContent = `${base} (${counts[c]})`;
+      });
+    }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+    }
+
+    function render() {
+      const q = query.trim().toLowerCase();
+      const filtered = ITEMS.filter(item => {
+        if (activeCat !== "all" && item.category !== activeCat) return false;
+        if (!q) return true;
+        return (
+          item.title.toLowerCase().includes(q) ||
+          item.location.toLowerCase().includes(q) ||
+          item.tip.toLowerCase().includes(q) ||
+          (item.reward || "").toLowerCase().includes(q) ||
+          (item.tag || "").toLowerCase().includes(q)
+        );
+      });
+
+      if (!filtered.length) {
+        listEl.innerHTML = `<div class="empty">Nothing matches "${esc(query)}". Try clearing the filter.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(item => {
+        const isDone = checked.has(item.id);
+        return `
+          <article class="card ${isDone ? "done" : ""}" data-id="${esc(item.id)}">
+            <div class="check" aria-hidden="true">
+              <svg viewBox="0 0 16 16"><polyline points="3.5 8.5 6.8 11.8 12.8 4.8"></polyline></svg>
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="cat-pill cat-${esc(item.category)}">${esc(CAT_LABELS[item.category] || item.category)}</span>
+                <span class="loc">&bull; ${esc(item.location)}</span>
+              </div>
+              <h2 class="card-title">${esc(item.title)}</h2>
+              <p class="card-tip">${esc(item.tip)}</p>
+              <div class="card-foot">
+                ${item.reward ? `<span class="reward">${esc(item.reward)}</span>` : ""}
+                ${item.tag ? `<span>&bull; ${esc(item.tag)}</span>` : ""}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    listEl.addEventListener("click", e => {
+      const card = e.target.closest(".card");
+      if (!card) return;
+      const id = card.dataset.id;
+      if (checked.has(id)) checked.delete(id);
+      else checked.add(id);
+      saveState();
+      updateCounts();
+      render();
+    });
+
+    tabsEl.addEventListener("click", e => {
+      const btn = e.target.closest(".tab");
+      if (!btn) return;
+      activeCat = btn.dataset.cat;
+      tabsEl.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b === btn));
+      render();
+    });
+
+    searchEl.addEventListener("input", e => {
+      query = e.target.value;
+      render();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      if (!checked.size) return;
+      if (confirm("Reset all checked spots?")) {
+        checked.clear();
+        saveState();
+        updateCounts();
+        render();
+      }
+    });
+
+    updateCounts();
+    render();
+  </script>
+</body>
+</html>
