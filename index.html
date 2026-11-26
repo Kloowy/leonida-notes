@@ -48,9 +48,9 @@
       -webkit-font-smoothing: antialiased;
       padding: 28px 16px 72px;
       background:
-        radial-gradient(1100px 520px at 85% -8%, rgba(255, 79, 163, 0.28), transparent 60%),
-        radial-gradient(900px 480px at -10% 4%, rgba(138, 63, 252, 0.30), transparent 62%),
-        radial-gradient(700px 400px at 50% 112%, rgba(255, 155, 61, 0.14), transparent 65%),
+        radial-gradient(1100px 520px at 85% -8%, rgba(255, 79, 163, 0.21), transparent 60%),
+        radial-gradient(900px 480px at -10% 4%, rgba(138, 63, 252, 0.22), transparent 62%),
+        radial-gradient(700px 400px at 50% 112%, rgba(255, 155, 61, 0.10), transparent 65%),
         linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 46%, #08040f 100%);
       background-attachment: fixed;
     }
@@ -103,7 +103,7 @@
       height: 7px;
       border-radius: 50%;
       background: var(--teal);
-      box-shadow: 0 0 10px var(--teal);
+      box-shadow: 0 0 7px var(--teal);
       animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -143,7 +143,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      filter: drop-shadow(0 6px 26px rgba(255, 79, 163, 0.35));
+      filter: drop-shadow(0 4px 18px rgba(255, 79, 163, 0.25));
       margin-bottom: 12px;
     }
 
@@ -216,7 +216,7 @@
       width: 0%;
       background: var(--sunset);
       border-radius: 999px;
-      box-shadow: 0 0 16px rgba(255, 122, 89, 0.6);
+      box-shadow: 0 0 11px rgba(255, 122, 89, 0.44);
       transition: width 0.3s ease;
     }
 
@@ -258,7 +258,7 @@
       background: var(--sunset);
       color: #1a0716;
       border-color: transparent;
-      box-shadow: 0 4px 18px rgba(255, 79, 163, 0.35);
+      box-shadow: 0 3px 13px rgba(255, 79, 163, 0.25);
     }
 
     .search-box {
@@ -299,7 +299,8 @@
       left: 0; top: 0; bottom: 0;
       width: 3px;
       background: var(--accent-c, var(--pink));
-      box-shadow: 0 0 14px var(--accent-c, var(--pink));
+      box-shadow: 0 0 9px var(--accent-c, var(--pink));
+      opacity: 0.88;
     }
     .card[data-cat="money"] { --accent-c: var(--money); }
     .card[data-cat="easter_eggs"] { --accent-c: var(--egg); }
@@ -309,7 +310,20 @@
       border-color: rgba(255, 255, 255, 0.16);
       transform: translateY(-1px);
     }
-    .card.done { opacity: 0.45; }
+    .card.leaving-down {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .card.leaving-up {
+      opacity: 0;
+      transform: translateY(-12px) scale(0.985);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .card.done { opacity: 0.56; }
+    .card.done:hover { opacity: 0.78; }
     .card.done .card-title { text-decoration: line-through; color: var(--muted); }
 
     .check {
@@ -328,7 +342,7 @@
     .card.done .check {
       background: var(--accent-c, var(--pink));
       border-color: var(--accent-c, var(--pink));
-      box-shadow: 0 0 12px var(--accent-c, var(--pink));
+      box-shadow: 0 0 8px var(--accent-c, var(--pink));
     }
     .check svg {
       width: 14px;
@@ -397,7 +411,62 @@
       border-radius: 999px;
     }
 
-    .empty { text-align: center; padding: 44px 16px; color: var(--muted); font-size: 14px; }
+    .empty { text-align: center; padding: 36px 16px; color: var(--muted); font-size: 14px; }
+
+    .completed-drawer {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(24, 13, 42, 0.62);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .completed-drawer.pulse-hit {
+      border-color: var(--border-hot);
+      box-shadow: 0 0 14px rgba(255, 79, 163, 0.2);
+    }
+    .completed-drawer summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px 16px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .completed-drawer summary::-webkit-details-marker { display: none; }
+    .completed-drawer summary:hover { color: var(--text); background: rgba(255, 255, 255, 0.03); }
+    .drawer-left { display: inline-flex; align-items: center; gap: 9px; }
+    .drawer-count {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--teal);
+      background: var(--money-bg);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .drawer-chev {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      fill: none;
+      transition: transform 0.2s ease;
+    }
+    .completed-drawer[open] .drawer-chev { transform: rotate(180deg); }
+    .completed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 4px 12px 12px;
+    }
 
     footer {
       margin-top: 40px;
@@ -440,7 +509,7 @@
 
     <section class="progress-card">
       <div class="progress-top">
-        <div class="progress-count" id="progressText">0 / 23 <span>checked off</span></div>
+        <div class="progress-count" id="progressText">0 / 22 <span>checked off</span></div>
         <div class="progress-actions">
           <button class="btn-ghost" type="button" onclick="window.print()">Save / Print PDF</button>
           <button class="btn-ghost" type="button" id="resetBtn">Reset</button>
@@ -461,6 +530,17 @@
 
     <main class="list" id="cardList"></main>
 
+    <details class="completed-drawer" id="completedDrawer" hidden>
+      <summary>
+        <span class="drawer-left">
+          <span>Completed</span>
+          <span class="drawer-count" id="completedCount">0</span>
+        </span>
+        <svg class="drawer-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </summary>
+      <div class="completed-list" id="completedList"></div>
+    </details>
+
     <footer>
       <span>Progress saves automatically on this device.</span>
       <span>Updates live with new <a href="https://www.youtube.com/@RaulsLeonida" target="_blank" rel="noopener">@RaulsLeonida</a> Shorts.</span>
@@ -468,7 +548,7 @@
   </div>
 
   <script>
-    const ITEMS = [{"id": "hyde-island-saw-hunt", "category": "money", "title": "Hyde Island 'Saw' Survival Hunt ($25K + Unbuyable .50 Cal)", "location": "Hyde Island (North of Lummox County)", "reward": "$25,000 + Island Poacher FF-50 Sniper", "tip": "Step onto Hyde Island to trigger a daytime tranq-dart ambush and wake up unarmed in a red container with an explosive neck collar (don't swim off or it detonates!). Grab the shotgun, ambush the armored hunter point-blank, and remove the collar at the boathouse for $25k ($15k cash + $10k bank) plus his unique FF-50 sniper.", "tag": "Best Secret Payout"}, {"id": "crab-outpost-loot", "category": "money", "title": "$10K Marked Stash + Unique Crabshack VF5 SMG", "location": "Pelican Valley / West Key Lento", "reward": "$1-2K Cash + $8-10K Marked + SMG", "tip": "Clear the guarded Crab Research Outpost by the fishing shacks. Grab the gold weapon icon by the dockhouse and launder the marked bills at a Fence.", "tag": "Best Early Loot"}, {"id": "three-sheets-backroom", "category": "money", "title": "Three Sheets Liquor Hidden Backroom Stash", "location": "Key Lento", "reward": "Early Cash + Contraband", "tip": "Buy the rum for Jason's neighbor Shirley first so you don't break her quest. Then return, hop the rear fence, clear the guards, and follow the talking parrot to the stash.", "tag": "Chapter 1"}, {"id": "manatee-motel-shotgun", "category": "money", "title": "Abandoned Gang Cash + Free Shotgun", "location": "Manatee Motel (SW of Hamlet)", "reward": "Free Shotgun + Cash", "tip": "Listen for gunshots just above the Shoeless Keys. Wildlife wrecked the gang hideout - grab the free shotgun out back and sweep the leftover cash.", "tag": "Free Weapon"}, {"id": "kenton-shipwrecks", "category": "money", "title": "Underwater Shipwreck Cash Bundles", "location": "Off the Coast of Key Lento", "reward": "Waterproof Cash + Valuables", "tip": "No gunfight required. Underwater diving works right in Chapter 1 - dive the shallow coastal drop-offs and debris fields for waterproof cash and fenceable loot.", "tag": "No Combat"}, {"id": "floorboard-stash", "category": "money", "title": "Jason's Secret Floorboard Stash", "location": "Jason's House (Key Lento)", "reward": "Safe Cash & Gear Storage", "tip": "Hide hot cash and gear under the floorboards early in Chapter 1 so getting busted or wasted doesn't drain your bankroll.", "tag": "Safehouse"}, {"id": "vice-city-2002-portal", "category": "easter_eggs", "title": "Working Portal Back to 2002 PS2 Vice City (Malibu Club)", "location": "Key Lento Tower -> 12 LPL Substations -> Reactor 2 (7 PM-6 AM)", "reward": "Tommy Vercetti Shirt + Zombie Bobber", "tip": "Climb the Badger R&D radio tower in Key Lento and pull the power switch, then punch all 12 LPL substation codes in order with zero fast travel (spells out 'LIFE IS PASSING ME BY'). Wait for the unknown text, hit Reactor 2 at night (7 PM-6 AM), step into the purple rift to visit the 2002 PS2 Malibu Club with Kent Paul, and claim Tommy's Hawaiian shirt + Western Malibu Zombie Bobber.", "tag": "Mega Easter Egg"}, {"id": "self-aware-npc-garage", "category": "easter_eggs", "title": "Self-Aware NPC's 'Simulation' Conspiracy Garage", "location": "Belville", "reward": "Hidden Meta Lore", "tip": "Walk inside this Belville garage to find conspiracy boards tracking cloned NPCs, cars despawning off-screen, and 'I can't take it anymore, please let me be free' spray-painted across the wall.", "tag": "Viral Find"}, {"id": "capri-pentagram-ritual", "category": "easter_eggs", "title": "Capri Abandoned Warehouse Demon Ritual", "location": "Capri (Above Tortoise Lake)", "reward": "Interactive Horror Event", "tip": "Enter the abandoned warehouse containing a blood-drawn pentagram, flickering candles, and an altar book warning about cleansing fire. Knock out a local outside, carry them in, and drop them dead-center on the pentagram to trigger the blackout and fire ritual.", "tag": "Horror Secret"}, {"id": "fake-painted-tunnel", "category": "easter_eggs", "title": "Wile E. Coyote Fake Painted Highway Tunnel", "location": "Vice Decor District, Vice City", "reward": "Hidden Slapstick Wall", "tip": "Rockstar painted a hyper-realistic fake highway tunnel - complete with cars, buildings, sky, and matching street lighting - straight onto solid concrete.", "tag": "Funny Detail"}, {"id": "dexter-apartment", "category": "easter_eggs", "title": "Dexter Morgan's Apartment, Roof Kill Kit & Boat", "location": "Trinity Apartments, Washington Island", "reward": "Kill Kit + Slice of Life Boat", "tip": "Spot the exterior AC unit by the door, then climb to the roof for the knife, tape, rope, and syringe. Check the nearby docks for the Lure Predator L35P boat.", "tag": "Classic Egg"}, {"id": "radio-tower-nest", "category": "easter_eggs", "title": "7-Minute Radio Tower Giant Bird's Nest", "location": "Vice-Dale County", "reward": "Throwable Eggs + Base Jump", "tip": "Scale the massive TV/cell tower ladder (~7 min climb). At the top: a giant nest of painted Easter eggs you can chuck off the edge, an influencer NPC, and a base jump.", "tag": "Easter Egg"}, {"id": "mandy-clues", "category": "easter_eggs", "title": "Mandy's Dark Backyard & Car Trunk Clues", "location": "Chapter 1 - 'Pipework' Mission", "reward": "Hidden Environmental Lore", "tip": "Don't walk straight out after meeting Mandy. Inspect her backyard and open car trunk for creepy environmental clues most players miss.", "tag": "Dark Lore"}, {"id": "trailer-bikini-girl", "category": "easter_eggs", "title": "Trailer 1 Bikini Girl (Rockstar Meta Roast)", "location": "Early Lucia Mission - 'Day Release'", "reward": "Secret Dialogue", "tip": "She's a separate NPC roaming the back of the yacht party. Walk up as Lucia - Lucia says she looks familiar, and she replies she's a famous model.", "tag": "Meta Cameo"}, {"id": "fabien-magazine", "category": "easter_eggs", "title": "GTA 5 Yoga Guru (Fabien LaRouche) Callback", "location": "Jason's Stilted House, Leonida Keys", "reward": "GTA 5 Universe Link", "tip": "Check the front deck in Chapter 1 for a 'Body Copy' fitness magazine featuring a yoga masterclass by Fabien LaRouche from GTA 5.", "tag": "GTA 5 Link"}, {"id": "rdr-gta4-books", "category": "easter_eggs", "title": "Red Dead & 2008 Liberty City Books", "location": "Millport & Key Lento", "reward": "RDR2 + GTA IV Lore", "tip": "Read the Western novels mentioning New Austin on the shelves at Jacob's Tavern (Millport), and check the back-door table in Jason's Key Lento house for a 2008 Liberty City mob memoir.", "tag": "Lore"}, {"id": "stop-leonida-train", "category": "survival", "title": "How to Actually Stop the Leonida Freight Train", "location": "Leonida Freight Rails", "reward": "Physics Myth Busted", "tip": "Unlike GTA 5's unstoppable freight train, parking a large truck directly across the tracks forces the new Leonida train to slam on its brakes to a dead stop (though Rockstar still locks the cab).", "tag": "Physics"}, {"id": "xbox-60fps-glitch", "category": "survival", "title": "Xbox 60 FPS Quick Resume Glitch (2x Speed Physics)", "location": "Xbox Series X|S Settings", "reward": "Unlocked FPS Chaos", "tip": "Drop Xbox display to 60Hz, launch GTA 6 until the 6 stars appear, flip back to 120Hz, open another game, then Quick Resume straight back into GTA 6. Framerate unlocks past 30 FPS - but physics run at double speed.", "tag": "Glitch"}, {"id": "five-micro-physics", "category": "survival", "title": "5 Hidden Micro-Physics Tricks You Can Trigger", "location": "All Regions", "reward": "Realism Details", "tip": "Shoot a pickup's gas tank for a moving trail of fire; park inches from another car so Jason opens the door gently; flip a rolled truck back onto its wheels by hand; slam a door with spider-webbed glass to pop the pane out; walk into bright sun glare for auto-sunglasses.", "tag": "Physics"}, {"id": "burner-cars-trackers", "category": "survival", "title": "Never Take Your Personal Car on Robberies", "location": "All Regions", "reward": "Avoid Impound", "tip": "Cops trace registered plates and impound your ride. Hotwire a burner car for loud jobs, or scrub trackers on stolen high-end cars at Pay 'N' Spray / a Fence first.", "tag": "Day-1 Rule"}, {"id": "trunk-duffel-buckme", "category": "survival", "title": "Trunk Loadouts, Duffel Bags & BuckMe ATMs", "location": "All Regions", "reward": "Keep Your Haul", "tip": "Rifles and spare outfits live in your car trunk. Getting wasted while carrying a Stash Bag risks losing the haul - deposit clean cash via BuckMe ATMs often and fence marked bills.", "tag": "Day-1 Rule"}, {"id": "early-suppressor-npcs", "category": "survival", "title": "Grab the Key Lento Suppressor & Respect NPCs", "location": "Key Lento Ammu-Nation", "reward": "Stealth Advantage", "tip": "Buy a sidearm suppressor right after the tutorial. Random Leonida NPCs pack concealed guns and jump you with bystanders - don't treat them like GTA 5 punching bags.", "tag": "Combat"}, {"id": "cheats-and-locked-shops", "category": "survival", "title": "Post-Story Cheats & 5 Ultimate-Only Shops", "location": "Progress Menu / Free-Roam", "reward": "Save Time", "tip": "Cheats unlock only after beating the story (and disable trophies/saving). Hit locked glass doors at Stock 305, Electric Fang Tattoo, Sara's Salon, One-Eyed Willie's, or Rideout Customs? Those 5 require the $100 Ultimate Edition.", "tag": "Unlock Rule"}];
+    const ITEMS = [{"id": "hyde-island-saw-hunt", "category": "money", "title": "Hyde Island 'Saw' Survival Hunt ($25K + Unbuyable .50 Cal)", "location": "Hyde Island (North of Lummox County)", "reward": "$25,000 + Island Poacher FF-50 Sniper", "tip": "Step onto Hyde Island to trigger a daytime tranq-dart ambush and wake up unarmed in a red container with an explosive neck collar (don't swim off or it detonates!). Grab the shotgun, ambush the armored hunter point-blank, and remove the collar at the boathouse for $25k ($15k cash + $10k bank) plus his unique FF-50 sniper.", "tag": "Best Secret Payout"}, {"id": "crab-outpost-loot", "category": "money", "title": "$10K Marked Stash + Unique Crabshack VF5 SMG", "location": "Pelican Valley / West Key Lento", "reward": "$1-2K Cash + $8-10K Marked + SMG", "tip": "Clear the guarded Crab Research Outpost by the fishing shacks. Grab the gold weapon icon by the dockhouse and launder the marked bills at a Fence.", "tag": "Best Early Loot"}, {"id": "three-sheets-backroom", "category": "money", "title": "Three Sheets Liquor Hidden Backroom Stash", "location": "Key Lento", "reward": "Early Cash + Contraband", "tip": "Buy the rum for Jason's neighbor Shirley first so you don't break her quest. Then return, hop the rear fence, clear the guards, and follow the talking parrot to the stash.", "tag": "Chapter 1"}, {"id": "manatee-motel-shotgun", "category": "money", "title": "Abandoned Gang Cash + Free Shotgun", "location": "Manatee Motel (SW of Hamlet)", "reward": "Free Shotgun + Cash", "tip": "Listen for gunshots just above the Shoeless Keys. Wildlife wrecked the gang hideout - grab the free shotgun out back and sweep the leftover cash.", "tag": "Free Weapon"}, {"id": "kenton-shipwrecks", "category": "money", "title": "Underwater Shipwreck Cash Bundles", "location": "Off the Coast of Key Lento", "reward": "Waterproof Cash + Valuables", "tip": "No gunfight required. Underwater diving works right in Chapter 1 - dive the shallow coastal drop-offs and debris fields for waterproof cash and fenceable loot.", "tag": "No Combat"}, {"id": "floorboard-stash", "category": "money", "title": "Jason's Secret Floorboard Stash", "location": "Jason's House (Key Lento)", "reward": "Safe Cash & Gear Storage", "tip": "Hide hot cash and gear under the floorboards early in Chapter 1 so getting busted or wasted doesn't drain your bankroll.", "tag": "Safehouse"}, {"id": "vice-city-2002-portal", "category": "easter_eggs", "title": "Working Portal Back to 2002 PS2 Vice City (Malibu Club)", "location": "Key Lento Tower -> 12 LPL Substations -> Reactor 2 (7 PM-6 AM)", "reward": "Tommy Vercetti Shirt + Zombie Bobber", "tip": "Climb the Badger R&D radio tower in Key Lento and pull the power switch, then punch all 12 LPL substation codes in order with zero fast travel (spells out 'LIFE IS PASSING ME BY'). Wait for the unknown text, hit Reactor 2 at night (7 PM-6 AM), step into the purple rift to visit the 2002 PS2 Malibu Club with Kent Paul, and claim Tommy's Hawaiian shirt + Western Malibu Zombie Bobber.", "tag": "Mega Easter Egg"}, {"id": "self-aware-npc-garage", "category": "easter_eggs", "title": "Self-Aware NPC's 'Simulation' Conspiracy Garage", "location": "Belville", "reward": "Hidden Meta Lore", "tip": "Walk inside this Belville garage to find conspiracy boards tracking cloned NPCs, cars despawning off-screen, and 'I can't take it anymore, please let me be free' spray-painted across the wall.", "tag": "Viral Find"}, {"id": "capri-pentagram-ritual", "category": "easter_eggs", "title": "Capri Abandoned Warehouse Demon Ritual", "location": "Capri (Above Tortoise Lake)", "reward": "Interactive Horror Event", "tip": "Enter the abandoned warehouse containing a blood-drawn pentagram, flickering candles, and an altar book warning about cleansing fire. Knock out a local outside, carry them in, and drop them dead-center on the pentagram to trigger the blackout and fire ritual.", "tag": "Horror Secret"}, {"id": "fake-painted-tunnel", "category": "easter_eggs", "title": "Wile E. Coyote Fake Painted Highway Tunnel", "location": "Vice Decor District, Vice City", "reward": "Hidden Slapstick Wall", "tip": "Rockstar painted a hyper-realistic fake highway tunnel - complete with cars, buildings, sky, and matching street lighting - straight onto solid concrete.", "tag": "Funny Detail"}, {"id": "dexter-apartment", "category": "easter_eggs", "title": "Dexter Morgan's Apartment, Roof Kill Kit & Boat", "location": "Trinity Apartments, Washington Island", "reward": "Kill Kit + Slice of Life Boat", "tip": "Spot the exterior AC unit by the door, then climb to the roof for the knife, tape, rope, and syringe. Check the nearby docks for the Lure Predator L35P boat.", "tag": "Classic Egg"}, {"id": "radio-tower-nest", "category": "easter_eggs", "title": "7-Minute Radio Tower Giant Bird's Nest", "location": "Vice-Dale County", "reward": "Throwable Eggs + Base Jump", "tip": "Scale the massive TV/cell tower ladder (~7 min climb). At the top: a giant nest of painted Easter eggs you can chuck off the edge, an influencer NPC, and a base jump.", "tag": "Easter Egg"}, {"id": "mandy-clues", "category": "easter_eggs", "title": "Mandy's Dark Backyard & Car Trunk Clues", "location": "Chapter 1 - 'Pipework' Mission", "reward": "Hidden Environmental Lore", "tip": "Don't walk straight out after meeting Mandy. Inspect her backyard and open car trunk for creepy environmental clues most players miss.", "tag": "Dark Lore"}, {"id": "trailer-bikini-girl", "category": "easter_eggs", "title": "Trailer 1 Bikini Girl (Rockstar Meta Roast)", "location": "Early Lucia Mission - 'Day Release'", "reward": "Secret Dialogue", "tip": "She's a separate NPC roaming the back of the yacht party. Walk up as Lucia - Lucia says she looks familiar, and she replies she's a famous model.", "tag": "Meta Cameo"}, {"id": "fabien-magazine", "category": "easter_eggs", "title": "GTA 5 Yoga Guru (Fabien LaRouche) Callback", "location": "Jason's Stilted House, Leonida Keys", "reward": "GTA 5 Universe Link", "tip": "Check the front deck in Chapter 1 for a 'Body Copy' fitness magazine featuring a yoga masterclass by Fabien LaRouche from GTA 5.", "tag": "GTA 5 Link"}, {"id": "rdr-gta4-books", "category": "easter_eggs", "title": "Red Dead & 2008 Liberty City Books", "location": "Millport & Key Lento", "reward": "RDR2 + GTA IV Lore", "tip": "Read the Western novels mentioning New Austin on the shelves at Jacob's Tavern (Millport), and check the back-door table in Jason's Key Lento house for a 2008 Liberty City mob memoir.", "tag": "Lore"}, {"id": "stop-leonida-train", "category": "survival", "title": "How to Actually Stop the Leonida Freight Train", "location": "Leonida Freight Rails", "reward": "Physics Myth Busted", "tip": "Unlike GTA 5's unstoppable freight train, parking a large truck directly across the tracks forces the new Leonida train to slam on its brakes to a dead stop (though Rockstar still locks the cab).", "tag": "Physics"}, {"id": "five-micro-physics", "category": "survival", "title": "5 Hidden Micro-Physics Tricks You Can Trigger", "location": "All Regions", "reward": "Realism Details", "tip": "Shoot a pickup's gas tank for a moving trail of fire; park inches from another car so Jason opens the door gently; flip a rolled truck back onto its wheels by hand; slam a door with spider-webbed glass to pop the pane out; walk into bright sun glare for auto-sunglasses.", "tag": "Physics"}, {"id": "burner-cars-trackers", "category": "survival", "title": "Never Take Your Personal Car on Robberies", "location": "All Regions", "reward": "Avoid Impound", "tip": "Cops trace registered plates and impound your ride. Hotwire a burner car for loud jobs, or scrub trackers on stolen high-end cars at Pay 'N' Spray / a Fence first.", "tag": "Day-1 Rule"}, {"id": "trunk-duffel-buckme", "category": "survival", "title": "Trunk Loadouts, Duffel Bags & BuckMe ATMs", "location": "All Regions", "reward": "Keep Your Haul", "tip": "Rifles and spare outfits live in your car trunk. Getting wasted while carrying a Stash Bag risks losing the haul - deposit clean cash via BuckMe ATMs often and fence marked bills.", "tag": "Day-1 Rule"}, {"id": "early-suppressor-npcs", "category": "survival", "title": "Grab the Key Lento Suppressor & Respect NPCs", "location": "Key Lento Ammu-Nation", "reward": "Stealth Advantage", "tip": "Buy a sidearm suppressor right after the tutorial. Random Leonida NPCs pack concealed guns and jump you with bystanders - don't treat them like GTA 5 punching bags.", "tag": "Combat"}, {"id": "cheats-and-locked-shops", "category": "survival", "title": "Post-Story Cheats & 5 Ultimate-Only Shops", "location": "Progress Menu / Free-Roam", "reward": "Save Time", "tip": "Cheats unlock only after beating the story (and disable trophies/saving). Hit locked glass doors at Stock 305, Electric Fang Tattoo, Sara's Salon, One-Eyed Willie's, or Rideout Customs? Those 5 require the $100 Ultimate Edition.", "tag": "Unlock Rule"}];
     const STORAGE_KEY = "raul_leonida_checked_v1";
     const CAT_LABELS = {
       money: "Cash & Loot",
@@ -481,6 +561,9 @@
     let checked = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
 
     const listEl = document.getElementById("cardList");
+    const completedDrawer = document.getElementById("completedDrawer");
+    const completedListEl = document.getElementById("completedList");
+    const completedCountEl = document.getElementById("completedCount");
     const tabsEl = document.getElementById("tabs");
     const searchEl = document.getElementById("searchInput");
     const progressText = document.getElementById("progressText");
@@ -514,6 +597,28 @@
       return String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
     }
 
+    function cardMarkup(item, isDone) {
+      return `
+        <article class="card ${isDone ? "done" : ""}" data-id="${esc(item.id)}" data-cat="${esc(item.category)}">
+          <div class="check" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><polyline points="3.5 8.5 6.8 11.8 12.8 4.8"></polyline></svg>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <span class="cat-pill cat-${esc(item.category)}">${esc(CAT_LABELS[item.category] || item.category)}</span>
+              <span class="loc">&bull; ${esc(item.location)}</span>
+            </div>
+            <h2 class="card-title">${esc(item.title)}</h2>
+            <p class="card-tip">${esc(item.tip)}</p>
+            <div class="card-foot">
+              ${item.reward ? `<span class="reward">${esc(item.reward)}</span>` : ""}
+              ${item.tag ? `<span>&bull; ${esc(item.tag)}</span>` : ""}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
     function render() {
       const q = query.trim().toLowerCase();
       const filtered = ITEMS.filter(item => {
@@ -528,45 +633,62 @@
         );
       });
 
+      const activeItems = filtered.filter(i => !checked.has(i.id));
+      const doneItems = filtered.filter(i => checked.has(i.id));
+
       if (!filtered.length) {
         listEl.innerHTML = `<div class="empty">Nothing matches "${esc(query)}". Try clearing the filter.</div>`;
+        completedDrawer.hidden = true;
+        completedListEl.innerHTML = "";
         return;
       }
 
-      listEl.innerHTML = filtered.map(item => {
-        const isDone = checked.has(item.id);
-        return `
-          <article class="card ${isDone ? "done" : ""}" data-id="${esc(item.id)}" data-cat="${esc(item.category)}">
-            <div class="check" aria-hidden="true">
-              <svg viewBox="0 0 16 16"><polyline points="3.5 8.5 6.8 11.8 12.8 4.8"></polyline></svg>
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <span class="cat-pill cat-${esc(item.category)}">${esc(CAT_LABELS[item.category] || item.category)}</span>
-                <span class="loc">&bull; ${esc(item.location)}</span>
-              </div>
-              <h2 class="card-title">${esc(item.title)}</h2>
-              <p class="card-tip">${esc(item.tip)}</p>
-              <div class="card-foot">
-                ${item.reward ? `<span class="reward">${esc(item.reward)}</span>` : ""}
-                ${item.tag ? `<span>&bull; ${esc(item.tag)}</span>` : ""}
-              </div>
-            </div>
-          </article>
-        `;
-      }).join("");
+      if (activeItems.length) {
+        listEl.innerHTML = activeItems.map(item => cardMarkup(item, false)).join("");
+      } else {
+        listEl.innerHTML = `<div class="empty">All spots here are checked off.</div>`;
+      }
+
+      if (doneItems.length) {
+        completedDrawer.hidden = false;
+        completedCountEl.textContent = String(doneItems.length);
+        completedListEl.innerHTML = doneItems.map(item => cardMarkup(item, true)).join("");
+        if (q && !activeItems.length) {
+          completedDrawer.open = true;
+        }
+      } else {
+        completedDrawer.hidden = true;
+        completedDrawer.open = false;
+        completedListEl.innerHTML = "";
+      }
     }
 
-    listEl.addEventListener("click", e => {
+    function handleCardToggle(e, fromCompleted) {
       const card = e.target.closest(".card");
-      if (!card) return;
+      if (!card || card.classList.contains("leaving-down") || card.classList.contains("leaving-up")) return;
       const id = card.dataset.id;
-      if (checked.has(id)) checked.delete(id);
-      else checked.add(id);
-      saveState();
-      updateCounts();
-      render();
-    });
+      const willCheck = !checked.has(id);
+
+      card.classList.toggle("done", willCheck);
+      card.classList.add(willCheck ? "leaving-down" : "leaving-up");
+
+      setTimeout(() => {
+        if (willCheck) checked.add(id);
+        else checked.delete(id);
+        saveState();
+        updateCounts();
+        render();
+        if (willCheck && !completedDrawer.hidden) {
+          completedDrawer.classList.remove("pulse-hit");
+          void completedDrawer.offsetWidth;
+          completedDrawer.classList.add("pulse-hit");
+          setTimeout(() => completedDrawer.classList.remove("pulse-hit"), 450);
+        }
+      }, 210);
+    }
+
+    listEl.addEventListener("click", e => handleCardToggle(e, false));
+    completedListEl.addEventListener("click", e => handleCardToggle(e, true));
 
     tabsEl.addEventListener("click", e => {
       const btn = e.target.closest(".tab");
